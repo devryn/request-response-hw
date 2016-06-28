@@ -74,14 +74,17 @@ loop do
 
     puts @request.inspect
     puts @params[:id]
+
     if @params[:id]
-      puts users.fetch(@params[:id].to_i - 1) { |n| puts "NOT_FOUND" }
-      elsif @request[:params][:resource] == "users"
-          users.each.with_index do |user, index|
-            puts "#{index + 1} - #{user}"
-          end
-      else puts NOT_FOUND
-        exit
+      user = users.fetch(@params[:id].to_i - 1) { puts "NOT_FOUND" }
+      puts "#{user.fetch(:first_name)} #{user.fetch(:last_name)} #{user.fetch(:age)}"
+    elsif @request[:params][:resource] == "users"
+      users.each.with_index do |user, index|
+        puts "#{index + 1} - #{user.fetch(:first_name)} #{user.fetch(:last_name)} #{user.fetch(:age)}"
+      end
+    else
+      puts NOT_FOUND
+      exit
     end
   end
 end
