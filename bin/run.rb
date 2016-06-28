@@ -54,12 +54,32 @@ loop do
   else
     @request = parse(raw_request)
     @params  = @request[:params]
-    # Use the @request and @params ivars to full the request and
+    # Use the @request and @params ivars to fill the request and
     # return an appropriate response
 
-    # YOUR CODE GOES BELOW HERE
+  users = [
+    {:first_name => "John",
+    :last_name => "Lennon",
+    :age => 42},
+    {:first_name => "Paul",
+    :last_name => "McCartney",
+    :age => 66},
+    {:first_name => "George",
+    :last_name => "Harrison",
+    :age => 18},
+    {:first_name => "Ringo",
+    :last_name => "Starr",
+    :age => 91}
+    ]
 
     puts @request.inspect
-    # YOUR CODE GOES ABOVE HERE  ^
+      if @request[:resource] == "users"
+        if r@request[:id]
+          users.each.with_index do |user, index|
+            puts "#{index + 1} - #{user}"
+          end
+        else puts NOT_FOUND
+        end
+      end
   end
 end
