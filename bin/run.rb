@@ -56,20 +56,30 @@ loop do
     @params  = @request[:params]
     # Use the @request and @params ivars to fill the request and
     # return an appropriate response
+class Users
+  attr_reader :first_name, :last_name, :age
+
+  def initialize
+    @first_name = first_name
+    @last_name = last_name
+    @age = age
+    @users = users
+  end
+end
 
   users = [
     {:first_name => "John",
     :last_name => "Lennon",
-    :age => 42},
+    :age => 40},
     {:first_name => "Paul",
     :last_name => "McCartney",
-    :age => 66},
+    :age => 74},
     {:first_name => "George",
     :last_name => "Harrison",
-    :age => 18},
+    :age => 58},
     {:first_name => "Ringo",
     :last_name => "Starr",
-    :age => 91}
+    :age => 75}
     ]
 
     puts @request.inspect
@@ -77,14 +87,17 @@ loop do
 
     if @params[:id]
       user = users.fetch(@params[:id].to_i - 1) { puts "NOT_FOUND" }
+      puts
       puts "#{user.fetch(:first_name)} #{user.fetch(:last_name)} #{user.fetch(:age)}"
+      puts
     elsif @request[:params][:resource] == "users"
       users.each.with_index do |user, index|
         puts "#{index + 1} - #{user.fetch(:first_name)} #{user.fetch(:last_name)} #{user.fetch(:age)}"
+        puts
       end
-    else
-      puts NOT_FOUND
-      exit
+    elsif @request[:method] == "DELETE"
+      users.reject { |h| delete.include? h[@request] }
+      puts "#{user.fetch(:first_name)} #{user.fetch(:last_name)} #{user.fetch(:age)} has been successfully deleted."
     end
   end
 end
